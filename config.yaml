@@ -1,0 +1,51 @@
+# 공식 Unitree RL Gym의 위치입니다.
+# 환경 변수 UNITREE_RL_GYM_ROOT가 있으면 환경 변수 값이 우선합니다.
+unitree_root: third_party/unitree_rl_gym
+policy_device: cpu
+sac_device: cuda
+
+# 모든 학습 명령은 아래 10개 시드를 각각 독립적으로 실행합니다.
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+# 재생 기본 시드입니다. 학습 시에는 seeds의 각 값으로 교체됩니다.
+seed: 0
+episodes: 3000
+max_steps: 128
+
+# 원본 GridWorld와 같은 64×64 목표 격자입니다.
+# 실제 공간에서는 한 칸을 5 cm로 대응시킵니다.
+grid_x_size: 64
+grid_y_size: 64
+cell_size: 0.05
+success_radius: 0.15
+
+# 조밀보상: -1 + progress_reward_scale × (현재 거리 - 다음 거리) / 최대 거리
+progress_reward_scale: 10.0
+
+# SAC action [-1, 1]을 실제 속도 명령으로 바꾸는 범위입니다.
+max_velocity_x: 1.0
+max_velocity_y: 1.0
+yaw_gain: 1.5
+max_yaw_rate: 1.0
+
+# 상위 정책 행동 하나를 0.2초 동안 유지합니다.
+high_level_dt: 0.2
+reset_warmup_seconds: 1.0
+fall_height: 0.45
+min_upright_gravity_z: -0.5
+
+buffer_size: 1000000
+batch_size: 256
+gamma: 0.98
+tau: 0.005
+learning_rate: 0.0003
+alpha: 0.2
+hidden_size: 256
+
+start_steps: 1000
+update_after: 1000
+update_every: 50
+her_k: 4
+
+moving_average_window: 20
+plot_every: 1
+checkpoint_every: 100

@@ -1,0 +1,19 @@
+# Direct runtime dependencies verified with Python 3.8.20 on Linux x86_64.
+# Reproduce the PyTorch/CUDA 11.7 build with environment.yml first, then run:
+#   python -m pip install -r requirements.txt
+# These pins cover direct imports, not a full transitive dependency lock.
+
+# SAC training and inference with the pretrained Unitree TorchScript policy.
+torch==1.13.1
+
+# Numerical operations, random sampling, and the replay buffer.
+numpy==1.24.4
+
+# Physics simulation and the optional interactive viewer.
+mujoco==3.2.3
+
+# Training curves and aggregate statistics plots (headless Agg backend).
+matplotlib==3.7.3
+
+# Experiment configuration and Unitree policy/model configuration.
+PyYAML==6.0.2
