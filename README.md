@@ -1,8 +1,8 @@
 # Unitree G1: SAC + Hindsight Experience Replay
 
-MuJoCo의 Unitree G1 로봇이 목표 위치에 도달하도록 **Soft Actor-Critic(SAC)**을 학습하고,
-**Hindsight Experience Replay(HER)**의 효과를 비교하는 프로젝트입니다.
-희소보상/조밀보상과 HER 사용 여부를 조합한 **4개 조건을 각각 10개 시드**로 실행합니다.
+MuJoCo의 Unitree G1 로봇이 목표 위치에 도달하도록 Soft Actor-Critic(SAC)을 학습하고,
+Hindsight Experience Replay(HER)의 효과를 비교하는 프로젝트입니다.
+희소보상/조밀보상과 HER 사용 여부를 조합한 4개 조건을 각각 10개 시드로 실행합니다.
 
 상위 SAC 정책은 현재 위치와 목표 위치를 받아 2차원 속도 명령을 출력합니다.
 고정된 Unitree G1 보행정책이 이 명령을 12개 관절의 제어로 변환합니다.
@@ -27,7 +27,7 @@ MuJoCo의 Unitree G1 로봇이 목표 위치에 도달하도록 **Soft Actor-Cri
 
 저장된 `history.csv`와 `run_config.json`을 확인한 결과, 네 조건 모두 시드 0~9의
 3,000에피소드 학습이 완료되어 있습니다. 다음 수치는 시드별 전체 에피소드 성공률의
-**평균 ± 시드 간 표본 표준편차**입니다. 단위는 %이며 표준편차는 퍼센트포인트입니다.
+평균 ± 시드 간 표본 표준편차입니다. 단위는 %이며 표준편차는 퍼센트포인트입니다.
 
 | 조건 | 시드 수 | 시드당 에피소드 | 전체 학습 성공률 |
 | --- | ---: | ---: | ---: |
@@ -37,7 +37,7 @@ MuJoCo의 Unitree G1 로봇이 목표 위치에 도달하도록 **Soft Actor-Cri
 | SAC + HER · 조밀보상 | 10 | 3,000 | 98.63 ± 0.13 |
 
 마지막 20에피소드의 성공률은 네 조건 모두 모든 시드에서 100%입니다.
-표와 그래프는 **학습 중 성공률**이며 별도의 평가 실험 결과가 아닙니다.
+표와 그래프는 학습 중 성공률이며 별도의 평가 실험 결과가 아닙니다.
 
 | 희소보상 · SAC | 희소보상 · SAC + HER |
 | --- | --- |
@@ -60,7 +60,7 @@ MuJoCo의 Unitree G1 로봇이 목표 위치에 도달하도록 **Soft Actor-Cri
 
 ### Python 환경
 
-확인한 환경은 **Linux x86_64, Python 3.8.20, PyTorch 1.13.1 / CUDA 11.7**입니다.
+실험한 환경은 Linux x86_64, Python 3.8.20, PyTorch 1.13.1 / CUDA 11.7입니다.
 [requirements.txt](requirements.txt)는 코드가 직접 사용하는 다섯 패키지의 버전을 고정합니다.
 
 | 패키지 | 버전 | 용도 |
@@ -102,7 +102,7 @@ CPU를 명시하려면 `config.yaml`에서 `sac_device: cpu`로 설정합니다.
 
 ### Unitree 모델과 보행정책
 
-`third_party/`는 Git에서 제외되므로 **새로 받은 저장소에서는 자산 설치가 필요합니다.**
+`third_party/`는 Git에서 제외되므로 새로 받은 저장소에서는 자산 설치가 필요합니다.
 
 ```bash
 bash setup_unitree.sh
@@ -162,7 +162,7 @@ python train_multiseed.py --variants her dense_her --seeds 3 4 5
 ```
 
 위 명령들은 대안이므로 필요한 명령을 선택합니다. 같은 조건과 시드를 다시 실행하면
-기존 결과 때문에 실행이 거부됩니다. 여러 조건을 실행하는 명령은 **시드 우선 순서**이며,
+기존 결과 때문에 실행이 거부됩니다. 여러 조건을 실행하는 명령은 시드 우선 순서이며,
 선택한 모든 실행이 끝난 뒤 평균 그래프를 저장합니다. 같은 보상의 HER/NoHER가 모두
 선택되어 있으면 비교 그래프와 통계 CSV도 자동으로 생성합니다.
 
